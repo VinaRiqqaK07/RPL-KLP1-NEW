@@ -131,4 +131,6 @@
             </x-menu-detail>
         --}}
     @endif
+
+    @livewire("partial.toast-success")
 </div>
