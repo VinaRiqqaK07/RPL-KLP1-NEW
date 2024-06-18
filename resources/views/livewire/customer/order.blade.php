@@ -85,7 +85,7 @@
         </section>
 
         @if ($menus->isNotEmpty())
-            <section class="flex max-h-[62.5vh] flex-wrap justify-between overflow-y-auto">
+            <section class="flex h-[59.2vh] flex-wrap justify-between overflow-y-auto">
                 @foreach ($menus as $menu)
                     <div wire:key="{{ $menu->id }}">
                         <?php $menuImage = $menu->media->isNotEmpty()
@@ -131,4 +131,5 @@
             </x-menu-detail>
         --}}
     @endif
+
 </div>
