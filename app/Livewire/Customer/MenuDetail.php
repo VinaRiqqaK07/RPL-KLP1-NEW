@@ -40,9 +40,9 @@ class MenuDetail extends Component
         Session::put('cart', $cart);
 
         // Panggil event cartUpdated untuk memberi tahu komponen lain yang mendengarkan bahwa keranjang telah diperbarui
-        $this->dispatch('cartUpdated');
+        // $this->dispatch('cartUpdated');
 
-        $this->dispatch('closeModal');
+        $this->dispatch('close-modal');
 
         $this->dispatch('show-toast');
     }

@@ -132,4 +132,7 @@
         --}}
     @endif
 
+
+    @livewire("partial.toast-success")
+
 </div>
