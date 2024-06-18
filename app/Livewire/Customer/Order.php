@@ -46,7 +46,10 @@ class Order extends Component
 
         if ($this->category !== 'semua') {
             $activeCategory = Category::where('name', $this->category)->first();
-            $query->where('categories_id', $activeCategory->id);
+            if($activeCategory){
+                $query->where('categories_id', $activeCategory->id);
+            }
+            //$query->where('categories_id', $activeCategory->id);
         }
 
         if ($this->search) {

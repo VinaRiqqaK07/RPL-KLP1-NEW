@@ -9,8 +9,8 @@ class Checkout extends Component
 {
     public $list_pesanan = [];
     public $sumprice = 0;
-
-    protected $listeners = ['openOrderModal'];
+    public $deleteIndex = null;
+    protected $listeners = ['openOrderModal', 'deleteItem'];
 
     public function mount()
     {
@@ -41,20 +41,38 @@ class Checkout extends Component
         }
     }
 
-    public function deleteItem($index)
+    public function openDeleteItem($index)
     {
-        unset($this->list_pesanan[$index]);
-        $this->list_pesanan = array_values($this->list_pesanan);
-        Session::put('cart', $this->list_pesanan);
-        $this->updateSumPrice();
+        $this->deleteIndex = $index;
+
+        $this->dispatch('open-delete-item', name: 'delete-item-modal');
+        //dd($index);
     }
 
-    public function deleteAll()
+    public function openDeleteAll()
     {
-        $this->list_pesanan = [];
-        Session::forget('cart');
-        $this->updateSumPrice();
+        $this->dispatch('open-delete-all');
     }
+
+    // public function deleteItem($index)
+    // {
+    //     dd($index);
+    //     $this->deleteIndex = $index;
+    //     if (!is_null($this->deleteIndex)) {
+    //         unset($this->list_pesanan[$this->deleteIndex]);
+    //         $this->list_pesanan = array_values($this->list_pesanan);
+    //         Session::put('cart', $this->list_pesanan);
+    //         $this->updateSumPrice();
+    //         $this->deleteIndex = -1;
+    //     }
+    // }
+
+    // public function deleteAll()
+    // {
+    //     $this->list_pesanan = [];
+    //     Session::forget('cart');
+    //     $this->updateSumPrice();
+    // }
 
     public function openOrderModal()
     {

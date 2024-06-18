@@ -7,7 +7,7 @@
         @if (count($list_pesanan) === 0)
             <i class="fa-solid fa-arrow-rotate-left fa-lg hidden text-white"></i>
         @else
-            <button wire:click="deleteAll" type="button">
+            <button wire:click="openDeleteAll" type="button">
                 <i class="fa-solid fa-arrow-rotate-left fa-lg text-white"></i>
             </button>
         @endif
@@ -23,7 +23,7 @@
         @else
             <section class="overflow-y-auto px-2 pb-4 pt-1">
                 @foreach ($list_pesanan as $index => $pesanan)
-                    <section class="mx-4 my-7 rounded-xl bg-slate-50 p-3 shadow-lg">
+                    <section wire:key="{{ $index }}" class="mx-4 my-7 rounded-xl bg-slate-50 p-3 shadow-lg">
                         <section class="flex gap-3 p-2">
                             <section class="h-fit w-fit shadow-md">
                                 @php
@@ -62,7 +62,7 @@
                                             wire:click="increaseQty({{ $index }})"
                                         ></i>
                                     </section>
-                                    <button wire:click="deleteItem({{ $index }})" class="pe-1">
+                                    <button wire:click.prevent="openDeleteItem({{ $index }})" class="pe-1">
                                         <i class="fa-solid fa-trash-can fa-lg text-red-500"></i>
                                     </button>
                                 </section>
@@ -103,4 +103,8 @@
     @endif
 
     @livewire("customer.make-order-modal")
+    @if (!is_null($deleteIndex))
+        @livewire("customer.delete-item-modal", ["name" => "delete-item-modal", "index" => $deleteIndex], key($deleteIndex))
+    @endif
+    @livewire("customer.delete-all-modal")
 </div>
